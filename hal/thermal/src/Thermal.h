@@ -56,6 +56,11 @@ class Thermal : public LibThermal, public BnThermal {
 	ndk::ScopedAStatus registerThermalChangedCallbackWithType(const std::shared_ptr<IThermalChangedCallback>& in_callback, TemperatureType in_type) override;
 	ndk::ScopedAStatus unregisterThermalChangedCallback(const std::shared_ptr<IThermalChangedCallback>& in_callback) override;
 
+	// Methods from android.hardware.thermal V2/V3 follow.
+	ndk::ScopedAStatus registerCoolingDeviceChangedCallbackWithType(const std::shared_ptr<ICoolingDeviceChangedCallback>& in_callback, CoolingType in_type) override;
+	ndk::ScopedAStatus unregisterCoolingDeviceChangedCallback(const std::shared_ptr<ICoolingDeviceChangedCallback>& in_callback) override;
+	ndk::ScopedAStatus forecastSkinTemperature(int32_t in_forecastSeconds, float* _aidl_return) override;
+
 	int handleThermalEvents(void);
 
 	Thermal(Looper *);

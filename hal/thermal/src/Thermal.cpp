@@ -239,6 +239,25 @@ ndk::ScopedAStatus Thermal::unregisterThermalChangedCallback(const std::shared_p
 	return ndk::ScopedAStatus::ok();
 }
 
+/*
+ * Cooling device change notifications and skin temperature forecasts are not
+ * supported by this HAL; they are optional in android.hardware.thermal V3.
+ */
+ndk::ScopedAStatus Thermal::registerCoolingDeviceChangedCallbackWithType(const std::shared_ptr<ICoolingDeviceChangedCallback>& /* in_callback */, CoolingType /* in_type */)
+{
+	return ndk::ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+}
+
+ndk::ScopedAStatus Thermal::unregisterCoolingDeviceChangedCallback(const std::shared_ptr<ICoolingDeviceChangedCallback>& /* in_callback */)
+{
+	return ndk::ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+}
+
+ndk::ScopedAStatus Thermal::forecastSkinTemperature(int32_t /* in_forecastSeconds */, float* /* _aidl_return */)
+{
+	return ndk::ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+}
+
 /**
  * Notify all subscribers about a trip point crossed the way up or
  * down from the kernel.
